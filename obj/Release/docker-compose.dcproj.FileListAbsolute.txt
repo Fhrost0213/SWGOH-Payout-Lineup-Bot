@@ -1,0 +1,5 @@
+F:\Git\SWGOH-Payout-Lineup-Bot\obj\Release\docker-compose.dcproj.CoreCompileInputs.cache
+F:\Git\SWGOH-Payout-Lineup-Bot\bin\Release\SWGOH-Payout-Lineup-Bot.dll
+F:\Git\SWGOH-Payout-Lineup-Bot\bin\Release\SWGOH-Payout-Lineup-Bot.pdb
+F:\Git\SWGOH-Payout-Lineup-Bot\obj\Release\docker-compose.dcprojAssemblyReference.cache
+F:\Git\SWGOH-Payout-Lineup-Bot\obj\Release\docker-compose.dcproj.CopyComplete

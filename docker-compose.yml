@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  swgoh-payout-lineup-bot:
+    image: ${DOCKER_REGISTRY-}swgohpayoutlineupbot
+    build:
+      context: .
+      dockerfile: SWGOH-Payout-Lineup-Bot/Dockerfile
