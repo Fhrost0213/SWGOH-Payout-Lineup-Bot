@@ -6,7 +6,7 @@ namespace SWGOH_Payout_Lineup_Bot.Services
 {
     public static class PlayerService
     {
-        private static List<string> _players = new List<string>();
+        private static readonly List<string> _players = new List<string>();
 
         public static void AddPlayer(string playerName)
         {

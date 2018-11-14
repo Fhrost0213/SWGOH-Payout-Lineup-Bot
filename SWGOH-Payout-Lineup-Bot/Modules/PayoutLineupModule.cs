@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SWGOH_Payout_Lineup_Bot.Modules
 {
-    public class PayoutLineup : ModuleBase<SocketCommandContext>
+    public class PayoutLineupModule : ModuleBase<SocketCommandContext>
     {
         [Command("GetLineup")]
         public async Task GetLineupAsync()

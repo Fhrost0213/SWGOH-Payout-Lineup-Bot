@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SWGOH_Payout_Lineup_Bot.Modules
 {
-    public class Players : ModuleBase<SocketCommandContext>
+    public class PlayersModule : ModuleBase<SocketCommandContext>
     {
         [Command("AddPlayer")]
         public async Task AddPlayerAsync([Remainder]string playerName)

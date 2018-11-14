@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace SWGOH_Payout_Lineup_Bot
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
-
 
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _serviceProvider;
+
+        const string BotToken = "NTExOTMxNzIzMjY1NzM2NzA2.DsyIvQ.JT3AKTMMXQi74nqKtwgFtA3qrZU";
 
         public async Task RunBotAsync()
         {
@@ -27,18 +28,16 @@ namespace SWGOH_Payout_Lineup_Bot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "NTExOTMxNzIzMjY1NzM2NzA2.DsyIvQ.JT3AKTMMXQi74nqKtwgFtA3qrZU";
-
             //event subscriptions
             _client.Log += Log;
 
             await RegisterCommandsAsync();
 
-            await _client.LoginAsync(Discord.TokenType.Bot, botToken);
+            await _client.LoginAsync(TokenType.Bot, BotToken);
 
             await _client.StartAsync();
 
-            new TimeService().Start();
+            new TimerServiceSingleton().Start();
 
             await Task.Delay(-1);
         }
@@ -64,7 +63,7 @@ namespace SWGOH_Payout_Lineup_Bot
             if (message is null || message.Author.IsBot)
                 return;
 
-            int argPos = 0;
+            var argPos = 0;
 
             if (message.HasStringPrefix("#", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {

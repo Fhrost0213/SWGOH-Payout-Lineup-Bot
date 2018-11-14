@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SWGOH_Payout_Lineup_Bot.Services
 {
     public class PayoutLineupService
     {
-        private static string[] _payoutLineup = new string[20];
+        private static readonly string[] _payoutLineup = new string[20];
         private static int _currentIndex = 0;
 
         public static void AddPlayerToLineup(string playerName)
