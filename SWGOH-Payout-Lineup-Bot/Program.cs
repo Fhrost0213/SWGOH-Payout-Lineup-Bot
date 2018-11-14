@@ -21,6 +21,8 @@ namespace SWGOH_Payout_Lineup_Bot
 
         public async Task RunBotAsync()
         {
+            Console.WriteLine("Version 0.1c");
+
             _client = new DiscordSocketClient();
             _commands = new CommandService();
             _serviceProvider = new ServiceCollection()
@@ -31,13 +33,16 @@ namespace SWGOH_Payout_Lineup_Bot
             //event subscriptions
             _client.Log += Log;
 
+            
+
             await RegisterCommandsAsync();
 
             await _client.LoginAsync(TokenType.Bot, BotToken);
 
             await _client.StartAsync();
 
-            new TimerServiceSingleton().Start();
+            var timerService = new TimerService(_client);
+            timerService.Start();
 
             await Task.Delay(-1);
         }

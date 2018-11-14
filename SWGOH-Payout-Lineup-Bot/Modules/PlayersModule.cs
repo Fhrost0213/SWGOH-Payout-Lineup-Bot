@@ -20,6 +20,25 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
             await ReplyAsync("Added Player " + playerName);
         }
 
+        [Command("AddPlayers")]
+        public async Task AddPlayersAsync([Remainder]string playerNames)
+        {
+            if (playerNames is null)
+            {
+                await ReplyAsync("You need to specify at least one player!");
+                return;
+            }
+
+            foreach (var player in playerNames.Split(','))
+            {
+                var playerName = player.Trim();
+
+                PlayerService.AddPlayer(playerName);
+                PayoutLineupService.AddPlayerToLineup(playerName);
+                await ReplyAsync("Added Player " + playerName);
+            }  
+        }
+
         [Command("RemovePlayer")]
         public async Task RemovePlayerAsync([Remainder]string playerName)
         {
