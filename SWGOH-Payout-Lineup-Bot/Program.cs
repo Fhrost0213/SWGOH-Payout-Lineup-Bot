@@ -16,8 +16,7 @@ namespace SWGOH_Payout_Lineup_Bot
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _serviceProvider;
-
-        const string BotToken = "NTExOTMxNzIzMjY1NzM2NzA2.DsyIvQ.JT3AKTMMXQi74nqKtwgFtA3qrZU";
+        
 
         public async Task RunBotAsync()
         {
