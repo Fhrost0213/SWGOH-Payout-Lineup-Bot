@@ -9,14 +9,14 @@ namespace SWGOH_Payout_Lineup_Bot.Services
 {
     public class TimerService
     {
-        static bool _hasPosted;
-        static bool _hasMoved;
-        static DateTime _lastMoved = DateTime.Now;
-        static DateTime _lastPosted;
+        public static bool HasPosted { get; private set; }
+        public static bool HasMoved { get; private set; }
+        public static DateTime LastMoved { get; private set; } = DateTime.Now.Date;
+        public static DateTime LastPosted { get; private set; }
 
         public Timer Timer { get; private set; }
 
-        DiscordSocketClient _client;
+        readonly DiscordSocketClient _client;
 
 
         public TimerService(DiscordSocketClient client)
@@ -41,21 +41,14 @@ namespace SWGOH_Payout_Lineup_Bot.Services
         {
             Console.WriteLine("CheckForLineupMove at time: " + DateTime.Now.TimeOfDay);
 
-            if (DateTime.Today.Date != _lastMoved.Date)
+            if (LastMoved.Date != DateTime.Today)
             {
-                var start = TimeSpan.Parse("00:00"); // midnight
-                var end = TimeSpan.Parse("2:00"); // 2 o'clock
-                var now = DateTime.Now.TimeOfDay.Subtract(TimeSpan.Parse("06:00")); // Add 6 hour offset
-
-                if ((now > start) && (now < end))
+                if (!HasMoved)
                 {
-                    if (!_hasMoved)
-                    {
-                        PayoutLineupService.MoveLineup();
-                        await WritePayout("The new lineup for today is: ");
-                        _hasMoved = true;
-                        _lastMoved = DateTime.Now;
-                    }
+                    PayoutLineupService.MoveLineup();
+                    await WritePayout("The new lineup for today is: ");
+                    HasMoved = true;
+                    LastMoved = DateTime.Now;
                 }
             }
         }
@@ -81,20 +74,20 @@ namespace SWGOH_Payout_Lineup_Bot.Services
         {
             Console.WriteLine("CheckForPayoutMessage at time: " + DateTime.Now.TimeOfDay);
 
-            if (DateTime.Today.Date != _lastPosted.Date)
+            if (DateTime.Today.Date != LastPosted.Date)
             {
-                var start = TimeSpan.Parse("16:00"); // 4pm
-                var end = TimeSpan.Parse("17:00"); // 5pm
+                var start = TimeSpan.Parse("15:30"); // 3:30pm
+                var end = TimeSpan.Parse("17:00"); // 5:00pm
                 var now = DateTime.Now.TimeOfDay.Subtract(TimeSpan.Parse("06:00")); // Add 6 hour offset
 
                 if ((now > start) && (now < end))
                 {
-                    if (!_hasPosted)
+                    if (!HasPosted)
                     {
-                        await WritePayout("Today's current lineup is: ");
+                        await WritePayout("It's payout time fellas! Today's current lineup is: ");
 
-                        _hasPosted = true;
-                        _lastPosted = DateTime.Now;
+                        HasPosted = true;
+                        LastPosted = DateTime.Now;
                     }
                 }
             }
