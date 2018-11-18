@@ -10,8 +10,7 @@ namespace SWGOH_Payout_Lineup_Bot.Services
     public class TimerService
     {
         public static bool HasPosted { get; private set; }
-        public static bool HasMoved { get; private set; }
-        public static DateTime LastMoved { get; private set; } = DateTime.Now.Date;
+        public static DateTime LastMoved { get; private set; } = DateTime.Now;
         public static DateTime LastPosted { get; private set; }
 
         public Timer Timer { get; private set; }
@@ -41,15 +40,13 @@ namespace SWGOH_Payout_Lineup_Bot.Services
         {
             Console.WriteLine("CheckForLineupMove at time: " + DateTime.Now.TimeOfDay);
 
-            if (LastMoved.Date != DateTime.Today)
+            if (LastMoved.Date != DateTime.Today.Date)
             {
-                if (!HasMoved)
-                {
-                    PayoutLineupService.MoveLineup();
-                    await WritePayout("The new lineup for today is: ");
-                    HasMoved = true;
-                    LastMoved = DateTime.Now;
-                }
+                PayoutLineupService.MoveLineup();
+                await WritePayout("The new lineup for today is: ");
+
+                LastMoved = DateTime.Now;
+                HasPosted = false;
             }
         }
 
