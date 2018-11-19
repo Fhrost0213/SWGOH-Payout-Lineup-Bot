@@ -16,7 +16,8 @@ namespace SWGOH_Payout_Lineup_Bot
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _serviceProvider;
-        
+
+        private const string BotToken = "";
 
         public async Task RunBotAsync()
         {
@@ -32,15 +33,13 @@ namespace SWGOH_Payout_Lineup_Bot
             //event subscriptions
             _client.Log += Log;
 
-            
-
             await RegisterCommandsAsync();
 
             await _client.LoginAsync(TokenType.Bot, BotToken);
 
             await _client.StartAsync();
 
-            var timerService = new TimerService(_client);
+            var timerService = new TimerService();
             timerService.Start();
 
             await Task.Delay(-1);

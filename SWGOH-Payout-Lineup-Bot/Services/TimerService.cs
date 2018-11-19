@@ -1,8 +1,5 @@
-﻿using Discord;
-using Discord.WebSocket;
-using SWGOH_Payout_Lineup_Bot.Modules;
+﻿using SWGOH_Payout_Lineup_Bot.Modules;
 using System;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace SWGOH_Payout_Lineup_Bot.Services
@@ -14,14 +11,6 @@ namespace SWGOH_Payout_Lineup_Bot.Services
         public static DateTime LastPosted { get; private set; }
 
         public Timer Timer { get; private set; }
-
-        readonly DiscordSocketClient _client;
-
-
-        public TimerService(DiscordSocketClient client)
-        {
-            _client = client;
-        }
 
         public void Start()
         {
@@ -43,28 +32,11 @@ namespace SWGOH_Payout_Lineup_Bot.Services
             if (LastMoved.Date != DateTime.Today.Date)
             {
                 PayoutLineupService.MoveLineup();
-                await WritePayout("The new lineup for today is: ");
+                await new PayoutLineupModule().WriteLineupAsync("Tomorrow's lineup is: ");
 
                 LastMoved = DateTime.Now;
                 HasPosted = false;
             }
-        }
-
-        private Task WritePayout(string message)
-        {
-            int order = 0;
-            var lineup = PayoutLineupService.GetLineup();
-
-            var channel = _client.GetChannel(511939319704059912) as IMessageChannel;
-            channel.SendMessageAsync(message);
-
-            foreach (var player in lineup)
-            {
-                order++;
-                channel.SendMessageAsync(order + ": " + player);
-            }
-
-            return Task.CompletedTask;
         }
 
         private async void CheckForPayoutMessage()
@@ -81,7 +53,7 @@ namespace SWGOH_Payout_Lineup_Bot.Services
                 {
                     if (!HasPosted)
                     {
-                        await WritePayout("It's payout time fellas! Today's current lineup is: ");
+                        await new PayoutLineupModule().WriteLineupAsync("It's payout time fellas! Today's current lineup is: ");
 
                         HasPosted = true;
                         LastPosted = DateTime.Now;

@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using SWGOH_Payout_Lineup_Bot.Services;
 using System.Threading.Tasks;
+using Discord;
 
 namespace SWGOH_Payout_Lineup_Bot.Modules
 {
@@ -9,35 +10,32 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
         [Command("GetLineup")]
         public async Task GetLineupAsync()
         {
-            await ReplyAsync("Today's current lineup is: ");
-
-            await WriteLineupAsync();
+            await WriteLineupAsync("Today's current lineup is: ");
         }
 
-        private async Task WriteLineupAsync()
+        public async Task WriteLineupAsync(string message)
         {
-            int order = 0;
+            await Context.Channel.SendMessageAsync(message);
+
+            var order = 0;
             var lineup = PayoutLineupService.GetLineup();
 
             foreach (var player in lineup)
             {
                 order++;
-                await ReplyAsync(order + ": " + player);
+                await Context.Channel.SendMessageAsync(order + ": " + player);
             }
         }
 
         [Command("MoveLineup")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task MoveLineupAsync()
         {
-            await ReplyAsync("Previous lineup was: ");
-
-            await WriteLineupAsync();
+            await WriteLineupAsync("Previous lineup was: ");
 
             PayoutLineupService.MoveLineup();
 
-            await ReplyAsync("New lineup is: ");
-
-            await WriteLineupAsync();
+            await WriteLineupAsync("New lineup is: ");
         }
     }
 }

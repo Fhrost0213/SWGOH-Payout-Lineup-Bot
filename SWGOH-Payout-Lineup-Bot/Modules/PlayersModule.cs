@@ -1,12 +1,14 @@
 ﻿using Discord.Commands;
 using SWGOH_Payout_Lineup_Bot.Services;
 using System.Threading.Tasks;
+using Discord;
 
 namespace SWGOH_Payout_Lineup_Bot.Modules
 {
     public class PlayersModule : ModuleBase<SocketCommandContext>
     {
         [Command("AddPlayer")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task AddPlayerAsync([Remainder]string playerName)
         {
             if (playerName is null)
@@ -21,6 +23,7 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
         }
 
         [Command("AddPlayers")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task AddPlayersAsync([Remainder]string playerNames)
         {
             if (playerNames is null)
@@ -40,6 +43,7 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
         }
 
         [Command("RemovePlayer")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task RemovePlayerAsync([Remainder]string playerName)
         {
             if (playerName is null)
