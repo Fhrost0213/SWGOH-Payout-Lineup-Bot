@@ -9,6 +9,9 @@ namespace SWGOH_Payout_Lineup_Bot.Services
         public static bool HasPosted { get; private set; }
         public static DateTime LastMoved { get; private set; } = DateTime.Now;
         public static DateTime LastPosted { get; private set; }
+        public static string PayoutMessageOffset { get; set; } = "00:00";
+        public static string PayoutTimeStart { get; set; } = "15:30";
+        public static string PayoutTimeEnd { get; set; } = "17:00";
 
         public Timer Timer { get; private set; }
 
@@ -45,9 +48,9 @@ namespace SWGOH_Payout_Lineup_Bot.Services
 
             if (DateTime.Today.Date != LastPosted.Date)
             {
-                var start = TimeSpan.Parse("15:30"); // 3:30pm
-                var end = TimeSpan.Parse("17:00"); // 5:00pm
-                var now = DateTime.Now.TimeOfDay.Subtract(TimeSpan.Parse("06:00")); // Add 6 hour offset
+                var start = TimeSpan.Parse(PayoutTimeStart); // 3:30pm
+                var end = TimeSpan.Parse(PayoutTimeEnd); // 5:00pm
+                var now = DateTime.Now.TimeOfDay.Subtract(TimeSpan.Parse(PayoutMessageOffset));
 
                 if ((now > start) && (now < end))
                 {

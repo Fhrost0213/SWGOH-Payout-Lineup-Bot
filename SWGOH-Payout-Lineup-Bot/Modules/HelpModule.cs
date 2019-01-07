@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using System;
+using Discord.Commands;
 using System.Threading.Tasks;
 
 namespace SWGOH_Payout_Lineup_Bot.Modules
@@ -15,7 +16,14 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
             await ReplyAsync("RemovePlayer       | Remove a player from the lineup.");
             await ReplyAsync("GetPlayers         | Get the current players that are included in the lineup.");
             await ReplyAsync("GetLineup          | Get the current payout lineup.");
-            await ReplyAsync("IsTimerEnabled     | Returns the timer enabled status.");  
-        }
+            await ReplyAsync("IsTimerEnabled     | Returns the timer enabled status.");
+            await ReplyAsync("GetServerTime      | Gets the current time on the server.");
+            await ReplyAsync("GetPayoutTimeStart | Gets the payout start time.");
+            await ReplyAsync("GetPayoutTimeEnd   | Gets the payout end time.");
+            await ReplyAsync("GetPayoutMessageOffset | Gets the payout message offset.");
+            await ReplyAsync("SetPayoutTimeStart | Sets the payout start time.");
+            await ReplyAsync("SetPayoutTimeEnd   | Sets the payout end time.");
+            await ReplyAsync("SetPayoutMessageOffset | Sets the payout message offset. This value needs to be set in hours:minutes. Example - 06:00");
+        } 
     }
 }
