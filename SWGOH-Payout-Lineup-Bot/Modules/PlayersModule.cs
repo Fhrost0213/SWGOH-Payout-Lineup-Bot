@@ -7,6 +7,8 @@ namespace SWGOH_Payout_Lineup_Bot.Modules
 {
     public class PlayersModule : ModuleBase<SocketCommandContext>
     {
+        public PlayerService PlayerService { get; set; }
+
         [Command("AddPlayer")]
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task AddPlayerAsync([Remainder]string playerName)

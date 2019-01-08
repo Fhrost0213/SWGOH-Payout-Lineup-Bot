@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWGOH-Payout-Lineup-Bot", "
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0D6C2817-70C5-448B-BE20-DCADD8765F7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWGOH-Payout-Lineup-Bot.Tests", "SWGOH-Payout-Lineup-Bot.Tests\SWGOH-Payout-Lineup-Bot.Tests.csproj", "{2F243348-9011-4BA5-A5F4-57E56B24618F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0D6C2817-70C5-448B-BE20-DCADD8765F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6C2817-70C5-448B-BE20-DCADD8765F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6C2817-70C5-448B-BE20-DCADD8765F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F243348-9011-4BA5-A5F4-57E56B24618F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F243348-9011-4BA5-A5F4-57E56B24618F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F243348-9011-4BA5-A5F4-57E56B24618F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F243348-9011-4BA5-A5F4-57E56B24618F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

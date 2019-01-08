@@ -2,23 +2,29 @@
 
 namespace SWGOH_Payout_Lineup_Bot.Services
 {
-    public static class PlayerService
+    public class PlayerService
     {
-        private static readonly List<string> _players = new List<string>();
+        public PlayerDataService PlayerDataService { get; set; }
 
-        public static void AddPlayer(string playerName)
+        private readonly List<string> _players = new List<string>();
+
+        public void AddPlayer(string playerName)
         {
             _players.Add(playerName);
         }
 
-        public static void RemovePlayer(string playerName)
+        public void RemovePlayer(string playerName)
         {
             _players.Remove(playerName);
         }
 
-        public static List<string> GetPlayers()
+        public List<string> GetPlayers()
         {
             return _players;
+        }
+
+        public void InitializePlayers()
+        {
         }
     }
 }

@@ -10,4 +10,8 @@
     <PackageReference Include="Discord.Net" Version="1.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+
 </Project>

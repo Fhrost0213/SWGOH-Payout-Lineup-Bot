@@ -1,11 +1,11 @@
-﻿using SWGOH_Payout_Lineup_Bot.Modules;
-using System;
+﻿using System;
 using System.Timers;
 
 namespace SWGOH_Payout_Lineup_Bot.Services
 {
     public class TimerService
     {
+        public PayoutLineupService PayoutLineupService { get; set; }
         public static bool HasPosted { get; private set; }
         public static DateTime LastMoved { get; private set; } = DateTime.Now;
         public static DateTime LastPosted { get; private set; }
@@ -35,7 +35,7 @@ namespace SWGOH_Payout_Lineup_Bot.Services
             if (LastMoved.Date != DateTime.Today.Date)
             {
                 PayoutLineupService.MoveLineup();
-                await new PayoutLineupModule().WriteLineupAsync("Tomorrow's lineup is: ");
+                await PayoutLineupService.WriteLineupAsync("Tomorrow's lineup is: ");
 
                 LastMoved = DateTime.Now;
                 HasPosted = false;
@@ -56,7 +56,7 @@ namespace SWGOH_Payout_Lineup_Bot.Services
                 {
                     if (!HasPosted)
                     {
-                        await new PayoutLineupModule().WriteLineupAsync("It's payout time fellas! Today's current lineup is: ");
+                        await PayoutLineupService.WriteLineupAsync("It's payout time fellas! Today's current lineup is: ");
 
                         HasPosted = true;
                         LastPosted = DateTime.Now;

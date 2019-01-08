@@ -3,6 +3,13 @@ version: '3.4'
 services:
   swgoh-payout-lineup-bot:
     image: ${DOCKER_REGISTRY-}swgohpayoutlineupbot
+    environment:
+      DATA: /var/lib/swgohpayoutlineupbot/data
     build:
       context: .
       dockerfile: SWGOH-Payout-Lineup-Bot/Dockerfile
+    volumes:
+      - data:/var/lib/swgohpayoutlineupbot/data
+
+volumes:
+  data:

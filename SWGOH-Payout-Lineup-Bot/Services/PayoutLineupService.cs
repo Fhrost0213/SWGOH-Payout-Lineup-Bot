@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SWGOH_Payout_Lineup_Bot.Services
 {
     public class PayoutLineupService
     {
+        public ChannelService ChannelService { get; set; }
+
         private static readonly string[] _payoutLineup = new string[20];
-        private static int _currentIndex = 0;
+        private static int _currentIndex;
 
         public static void AddPlayerToLineup(string playerName)
         {
@@ -55,6 +58,22 @@ namespace SWGOH_Payout_Lineup_Bot.Services
                 {
                     _payoutLineup[i] = _payoutLineup[i + 1];
                 } 
+            }
+        }
+
+        public async Task WriteLineupAsync(string message)
+        {
+            var channel = ChannelService.GetMainChannel();
+
+            await channel.SendMessageAsync(message);
+
+            var order = 0;
+            var lineup = GetLineup();
+
+            foreach (var player in lineup)
+            {
+                order++;
+                await channel.SendMessageAsync(order + ": " + player);
             }
         }
     }

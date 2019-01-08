@@ -15,19 +15,28 @@ namespace SWGOH_Payout_Lineup_Bot
 
         private DiscordSocketClient _client;
         private CommandService _commands;
+        private ChannelService _channelService;
+        private PlayerService _playerService;
         private IServiceProvider _serviceProvider;
 
         private const string BotToken = "";
 
         public async Task RunBotAsync()
         {
-            Console.WriteLine("Version 0.1c");
+            Console.WriteLine("Version 0.2");
 
             _client = new DiscordSocketClient();
             _commands = new CommandService();
+            _channelService = new ChannelService();
+            _playerService = new PlayerService();
+
+            _channelService.SetMainChannelId(511939319704059912);
+
             _serviceProvider = new ServiceCollection()
                 .AddSingleton(_client)
                 .AddSingleton(_commands)
+                .AddSingleton(_channelService)
+                .AddSingleton(_playerService)
                 .BuildServiceProvider();
 
             //event subscriptions
